@@ -1,31 +1,31 @@
 class Employee {
     private _名前: string;
-    private _歳: number;
+    private _年: number;
     private _セックス: string;
     private _アドレス: string;
 
 
-    constructor(名前: string, 歳: number, セックス: string, アドレス: string) {
-        this._名前 = 名前;
-        this._歳 = 歳;
+    constructor( 名前: string, 年: number, セックス: string, アドレス: string) {
+        this._名前 =  名前;
+        this._年 = 年;
         this._セックス = セックス;
         this._アドレス = アドレス;
     }
 
-    get 名前(): string {
+    get  名前(): string {
         return this._名前;
     }
 
-    set 名前(value: string) {
+    set  名前(value: string) {
         this._名前 = value;
     }
 
-    get 歳(): number {
-        return this._歳;
+    get 年(): number {
+        return this._年;
     }
 
-    set 歳(value: number) {
-        this._歳 = value;
+    set 年(value: number) {
+        this._年 = value;
     }
 
     get セックス(): string {
@@ -46,23 +46,23 @@ class Employee {
 }
 
 class サラリーマン extends Employee {
-    private _レベル: number;
+    private _lever: number;
 
 
-    constructor(名前: string, 歳: number, セックス: string, アドレス: string, レベル: number) {
-        super(名前, 歳, セックス, アドレス);
-        this._レベル = レベル;
+    constructor( 名前: string, 年: number, セックス: string, アドレス: string, lever: number) {
+        super( 名前, 年, セックス, アドレス);
+        this._lever = lever;
     }
 
-    get レベル(): number {
-        return this._レベル;
+    get lever(): number {
+        return this._lever;
     }
 
-    set レベル(value: number) {
+    set lever(value: number) {
         if (value < 0 || value > 10) {
-            console.log("これはサラリーマンのレベルではない")
+            console.log("これはサラリーマンのleverではない")
         } else {
-            this._レベル = value;
+            this._lever = value;
 
         }
     }
@@ -71,8 +71,8 @@ class サラリーマン extends Employee {
 class エンジニア extends Employee {
     private _専門: string;
 
-    constructor(名前: string, 歳: number, セックス: string, アドレス: string, 専門: string) {
-        super(名前, 歳, セックス, アドレス);
+    constructor( 名前: string, 年: number, セックス: string, アドレス: string, 専門: string) {
+        super( 名前, 年, セックス, アドレス);
         this._専門 = 専門;
     }
 
@@ -88,8 +88,8 @@ class エンジニア extends Employee {
 class 社員 extends Employee {
     private _仕事: string;
 
-    constructor(名前: string, 歳: number, セックス: string, アドレス: string, 仕事: string) {
-        super(名前, 歳, セックス, アドレス);
+    constructor( 名前: string, 年: number, セックス: string, アドレス: string, 仕事: string) {
+        super( 名前, 年, セックス, アドレス);
         this._仕事 = 仕事;
     }
 
@@ -115,20 +115,22 @@ class 社員管理 {
         this.employee.push(a);
     }
 
-    調べ(名前: string): any {
+    find( 名前: string): any {
         this.employee.forEach((function (value, index, array) {
-            if (名前 === value.名前) {
+            if ( 名前 === value. 名前) {
                 console.table(array[index])
             }
 
         }))
     }
 
-    現れ(): any {
+    Show(): any {
         console.table(this.employee)
     }
 
 }
+
+
 
 // let employee = new サラリーマン("hieu", 19, "男", "HANOI", 9);
 // let employee1 = new エンジニア("ha", 20, "男", "HAIPHONG", "a1");
@@ -137,58 +139,150 @@ class 社員管理 {
 // ql.add管理(employee);
 // ql.add管理(employee1);
 // ql.add管理(employee2)
-// ql.調べ("hieu")
-// ql.現れ();
+// ql.find("hieu")
+// ql.show();
 
 let 入力 = require('readline-sync');
 let 新社員管理 = new 社員管理();
+class QL_employee{
+    employee:Employee[]=[];
+
+    サラリーマン:サラリーマン[]=[];
+    エンジニア:エンジニア[]=[];
+    社員:社員[]=[];
+    constructor() {
+    }
+
+
+}
 
 function showMenu() {
     let 選び = -1;
     do {
         console.log(
             `----MENU----
-             1.プラス
-             ２. ディスプレイ
-             3.調べ
-             0.戻り
+             1.プラス(up)
+             ２. ディスプレイ(display)
+             3.find(find)
+             0.戻り(out)
              `
         )
-        選び = +入力.question('選びを入力');
+        選び = +入力.question('選びを入力(選び)');
         switch (選び) {
             case 1:
-                add管理();
+                add();
                 break;
             case 2:
-                現れ();
+                showall();
                 break;
-            case 3:
+            case 3:  findall();
                 break
         }
     }
     while (選び !== 0);
 
-
+}
+function findall(){
+    console.log(新社員管理.find)
+    
 }
 
-function add管理() {
-    console.log(`----MENU----`);
-    let 名前 = 入力.question('名前を記入してください');
-    let 歳 = +入力.question('お年を記入してください');
-    let セックス = 入力.question('セックスを記入してください');
-    let アドレス = 入力.question('アドレスを記入してください');
-    let レベル = 入力.question('レベルを記入してください');
-    let person: サラリーマン = new サラリーマン(名前, 歳, セックス, アドレス, レベル);
-    新社員管理.add管理(person);
-    console.log("OK");
+function add() {
+    let 選び = -1;
+    do {
+        console.log(`
+        ----MENU----
+        1.addCN
+        2.addKS
+        3.addNV
+        0.OUT`)
+        選び = +入力.question('選びを入力(選び)');
+        switch (選び) {
+            case 1:
+                add管理()
+                break;
+            case 2:
+                addエンジニア();
+                break;
+            case 3:
+               add社員();
+                break
+
+        }
+    } while (選び != 0)
+
+    function add管理() {
+        console.log(`----MENU----`);
+        let  名前 = 入力.question(' 名前を記入してください(nhap ten)');
+        let 年 = +入力.question('お年を記入してください(nhap tuoi)');
+        let セックス = 入力.question('セックスを記入してください(nhap gioi tinh)');
+        let アドレス = 入力.question('アドレスを記入してください(nhap dia chi)');
+        let lever = 入力.question('leverを記入してください(nhap lever)');
+        let person: サラリーマン = new サラリーマン( 名前, 年, セックス, アドレス, lever);
+        新社員管理.add管理(person);
+        console.log("OK");
+    }
+
+    function addエンジニア() {
+        console.log(`----MENU----`);
+        let  名前 = 入力.question(' 名前を記入してください(nhap teb)');
+        let 年 = +入力.question('お年を記入してください(nhap tuoi)');
+        let セックス = 入力.question('セックスを記入してください(gioi tinh)');
+        let アドレス = 入力.question('アドレスを記入してください(dia chi)');
+        let 専門 = 入力.question('専門を記入してください(chuyen nganh)');
+        let エンジニア1: エンジニア = new エンジニア( 名前, 年, セックス, アドレス, 専門);
+        新社員管理.add管理(エンジニア1);
+        console.log("OK");
+    }
+
+    function add社員() {
+        console.log(`----MENU----`);
+        let  名前 = 入力.question(' 名前を記入してください(nhap ten)');
+        let 年 = +入力.question('お年を記入してください(nhap tuoi)');
+        let セックス = 入力.question('セックスを記入してください(nhap gioi tinh)');
+        let アドレス = 入力.question('アドレスを記入してください(nhap dia chi)');
+        let 仕事 = 入力.question('仕事を記入してください(nhap cong viec)');
+        let 社員1: 社員 = new 社員( 名前, 年, セックス, アドレス, 仕事);
+        新社員管理.add管理(社員1);
+        console.log("OK");
+    }
 }
 
-function 現れ() {
-    console.table(新社員管理.現れ());
+function showall() {
+    let 選び1 = -1;
+    do {
+        console.log(`
+        ----MENU----
+        1.showCN
+        2.showKS
+        3.showNV
+        0.OUT`)
+        選び1 = +入力.question('選びを入力(選び)');
+        switch (選び1) {
+            case 1:show1();
+                break;
+            case 2:show2();
+
+                break;
+            case 3:show3();
+
+
+                break
+
+        }
+    } while (選び1 != 0)
+    function show1(){
+        console.table(サラリーマン);
+    } function show2(){
+        console.table(エンジニア);
+    } function show3(){
+        console.table(社員);
+
+    }
 }
+
 
 showMenu()
-
 
 
 
